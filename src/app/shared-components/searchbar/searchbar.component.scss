@@ -6,6 +6,7 @@
     border-radius: 14px;
     border: 2px solid rgb(236, 236, 236);
     font-family: 'okine';
+    transition: all 0.4s;
     .icon {
         height: 37px;
         background: none;
@@ -40,4 +41,11 @@
         color: #c6c6c6;
 
       }
+}
+.body:hover{
+  border-color: #bfbdcd;
+}
+
+.body:focus{
+  border-color: #2611b0;
 }

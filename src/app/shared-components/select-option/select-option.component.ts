@@ -11,7 +11,7 @@ export class SelectOptionComponent {
   @Input() title: string = 'Select Option';  // Dynamic label
   @Input() options: string[] = []; // Dynamic options
 
-  isDropdownOpen = false;
+  isDropdownOpen = true;
   selectedOption: string | null = null;
 
   toggleDropdown() {

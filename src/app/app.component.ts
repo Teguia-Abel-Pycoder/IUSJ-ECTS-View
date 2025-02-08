@@ -11,8 +11,16 @@ export class AppComponent {
 
   title = 'IUSJ-ECTS';
 constructor( private router: Router) {}
-activeNav: string = ''; setActiveNav(navItem: string): void { this.activeNav = navItem; }
 
+activeNav: string = '';
+    sidebarExpanded: boolean = false;
 
+    setActiveNav(nav: string) {
+        this.activeNav = nav;
+    }
+
+    toggleSidebar() {
+        this.sidebarExpanded = !this.sidebarExpanded;
+    }
   
 }
