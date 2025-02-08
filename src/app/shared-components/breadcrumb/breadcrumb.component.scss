@@ -1,0 +1,16 @@
+.breadcrumb {
+    list-style: none;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+  
+  .breadcrumb li {
+    display: inline;
+    font-size: 14px;
+  }
+  
+  .breadcrumb li:not(:last-child)::after {
+    content: " / ";
+  }
+  

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'okine';
+    src: url('assets/fonts/okine/MADEOkineSansPERSONALUSE-Regular.otf') format('truetype');
+    /* Ajoutez d'autres formats de police si nécessaire */
+  }
+body{
+    font-family: 'okine';
+    margin: 0;
+    background-color: #fff;
+}

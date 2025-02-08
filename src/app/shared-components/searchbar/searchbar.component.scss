@@ -1,0 +1,43 @@
+.body{
+    background-color: #ffffff;
+    display: flex;
+    width: 250px;
+    height: 48px;
+    border-radius: 14px;
+    border: 2px solid rgb(236, 236, 236);
+    font-family: 'okine';
+    .icon {
+        height: 37px;
+        background: none;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-top: 5px;
+        svg{
+          fill:#b8b8b8;
+        }
+      }
+      .tune{
+        padding: 12px 0;
+        margin: 0 10px;
+      }
+      .input-field {
+        background-color: aqua;
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        font-size: 12px;
+        font-family: 'poppins';
+        color: #32303f;
+        border: none;
+        background: none;
+        padding-left: 0;
+        outline: none;
+      }
+      ::placeholder{
+        color: #c6c6c6;
+
+      }
+}

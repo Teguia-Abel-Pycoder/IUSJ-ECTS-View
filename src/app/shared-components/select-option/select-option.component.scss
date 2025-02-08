@@ -1,0 +1,82 @@
+.filters {
+    display: flex;
+    justify-content: space-between;
+}
+
+.attribute {
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    height: 31px;
+    border: 2px solid #dddddd;
+    padding: 0 10px;
+    border-radius: 13px;
+    margin-right: 12px;
+    width: auto;
+    max-width: 100%;
+    white-space: nowrap;
+                    font-size: 0.9em;      
+                    background-color: rgba(255, 255, 255, 0);
+}
+.attribute:hover{
+    border: 2px solid #403c3c;
+
+}
+/* Button container */
+.dropdown-btn {
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6px;
+    p{
+        margin: 0 6px;
+    }
+}
+
+/* Dropdown content */
+.dropdown-content {
+    transition: all 0.3s;
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 2px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    /* Initial state */
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+.dropdown-content:hover{
+    border: 2px solid #403c3c;
+}
+/* When dropdown is open */
+.dropdown-content.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dropdown-item:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Show dropdown when active */
+.attribute:focus-within .dropdown-content,
+.attribute:hover .dropdown-content {
+    display: block;
+}

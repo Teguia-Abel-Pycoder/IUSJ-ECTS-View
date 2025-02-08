@@ -1,0 +1,7 @@
+<ul>
+    <li *ngFor="let crumb of breadcrumbs; let i = index">
+      <span *ngIf="i > 0"> / </span>
+      <a [routerLink]="getBreadcrumbPath(i)">{{ crumb | titlecase }}</a>
+    </li>
+  </ul>
+  

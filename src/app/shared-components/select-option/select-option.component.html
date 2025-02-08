@@ -1,0 +1,19 @@
+<div class="filters">
+    <div class="attribute" (click)="toggleDropdown()">
+      <div class="dropdown-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#32303f">
+          <path [attr.d]="getSvgIcon()"/>
+        </svg>
+        <p>{{ selectedOption || title }}</p>
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#32303f">
+          <path d="M480-346.85 253.85-573 291-610.15l189 189 189-189L706.15-573 480-346.85Z"/>
+        </svg>
+      </div>
+      <div class="dropdown-content" [class.show]="isDropdownOpen">
+        <div *ngFor="let option of options" class="dropdown-item" (click)="selectOption(option)">
+          {{ option }}
+        </div>
+      </div>
+    </div>
+  </div>
+   
