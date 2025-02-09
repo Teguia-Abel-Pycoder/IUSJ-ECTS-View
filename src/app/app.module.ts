@@ -9,7 +9,8 @@ import { EquivalenceComponent } from './main-components/equivalence/equivalence.
 import { UserComponent } from './main-components/user/user.component';
 import { StudentComponent } from './main-components/student/student.component';
 import { SelectOptionComponent } from './shared-components/select-option/select-option.component';
-import { BreadcrumbComponent } from './shared-components/breadcrumb/breadcrumb.component'; // ✅ Import standalone component
+import { BreadcrumbComponent } from './shared-components/breadcrumb/breadcrumb.component';
+import { ModalComponent } from './shared-components/modal/modal.component'; // ✅ Import standalone component
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BreadcrumbComponent } from './shared-components/breadcrumb/breadcrumb.c
     EquivalenceComponent,
     UserComponent,
     StudentComponent,
-    SelectOptionComponent
+    SelectOptionComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
