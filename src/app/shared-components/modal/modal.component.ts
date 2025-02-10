@@ -4,14 +4,16 @@ import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { map, Observable, startWith } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   standalone: true,
+  encapsulation: ViewEncapsulation.Emulated, 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
@@ -34,10 +36,13 @@ export class ModalComponent {
     Validators.required,
     Validators.minLength(3),
   ]);
-
+  constructor(private overlayContainer: OverlayContainer) {}
   // Options for autocomplete
   options: string[] = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
+  ngOnInit() {
+    this.overlayContainer.getContainerElement().classList.add('custom-autocomplete-container');
+  }
   // Filtered options observable
   filteredOptions: Observable<string[]> = this.classLevelControl.valueChanges.pipe(
     startWith(''),
