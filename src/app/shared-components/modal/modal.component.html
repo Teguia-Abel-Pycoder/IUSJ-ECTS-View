@@ -3,7 +3,7 @@
   [(visible)]="visible" 
   [modal]="true" 
   [style]="{ width: '40vw' }" 
-  [baseZIndex]="10000" 
+  [baseZIndex]="9999" 
   [draggable]="true" 
   [resizable]="false"
   aria-labelledby="modal-title"
@@ -27,14 +27,14 @@
         placeholder="Class level..."
       />
       <mat-autocomplete 
-      #auto="matAutocomplete" 
-      (optionSelected)="onOptionSelected($event)" 
-      [panelClass]="'custom-autocomplete-panel'"
-    >
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
+        #auto="matAutocomplete" 
+        (optionSelected)="onOptionSelected($event)" 
+        [panelClass]="'custom-autocomplete-panel'"
+      >
+        <mat-option  *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </div>
   </div>
 

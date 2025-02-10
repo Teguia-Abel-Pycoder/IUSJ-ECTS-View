@@ -1,7 +1,7 @@
 .custom-autocomplete-panel {
-    z-index: 10001 !important; /* Ensure it's higher than the modal's z-index */
+    z-index: 10001 !important; /* Ensure it's higher than the modal's baseZIndex */
+    position: absolute !important; /* Ensure proper positioning */
   }
-
 ::ng-deep .p-dialog {
     box-shadow: 1px 10px 8px 500px rgba(3, 3, 3, 0.1); // Subtle shadow
     border-radius:  8px ;
@@ -31,6 +31,15 @@
         font-family: 'okine';
         transition: all 0.4s;
         padding-left: 10px;
+        
+          mat-autocomplete{
+            z-index: 10001 !important; /* Ensure it's higher than the modal's z-index */
+        
+          }
+          mat-option{
+            z-index: 10001 !important; /* Ensure it's higher than the modal's z-index */
+        
+          }
         .icon {
             height: 37px;
             background: none;
