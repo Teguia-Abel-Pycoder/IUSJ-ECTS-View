@@ -15,9 +15,7 @@ throw new Error('Method not implemented.');
 deleteSelectedArtists() {
 throw new Error('Method not implemented.');
 }
-openMyModal() {
-throw new Error('Method not implemented.');
-}
+
 artists: any;
 toggleArtistSelection(arg0: any,$event: Event) {
 throw new Error('Method not implemented.');
