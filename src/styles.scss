@@ -15,7 +15,7 @@ body{
     background-color: #fff;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 .cdk-overlay-container {
   z-index: 100000 !important;
@@ -23,6 +23,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .cdk-overlay-pane {
   z-index: 100001 !important;
+}
+
+.custom-autocomplete-panel {
+  z-index: 99999 !important;
+}
+.custom-autocomplete-container .mat-autocomplete-panel {
+  z-index: 99999 !important;
 }
 
 /* Style the autocomplete dropdown */
@@ -56,8 +63,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Add a separator between options (optional) */
 .custom-autocomplete-panel .mat-option + .mat-option {
   border-top: 1px solid #eee;
-}
-
-.custom-autocomplete-container .mat-autocomplete-panel {
-  z-index: 99999 !important;
 }
