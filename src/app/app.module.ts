@@ -10,8 +10,10 @@ import { UserComponent } from './main-components/user/user.component';
 import { StudentComponent } from './main-components/student/student.component';
 import { SelectOptionComponent } from './shared-components/select-option/select-option.component';
 import { BreadcrumbComponent } from './shared-components/breadcrumb/breadcrumb.component';
-import { ModalComponent } from './shared-components/modal/modal.component'; // ✅ Import standalone component
-
+import { ModalComponent } from './shared-components/modal/modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,16 +22,20 @@ import { ModalComponent } from './shared-components/modal/modal.component'; // �
     UserComponent,
     StudentComponent,
     SelectOptionComponent,
-    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SearchbarComponent, // ✅ Standalone component
-    HeaderComponent, // ✅ Standalone component
-    BreadcrumbComponent // ✅ Standalone component (moved from declarations to imports)
+    SearchbarComponent,
+    HeaderComponent, 
+    BreadcrumbComponent,
+    ModalComponent,
+    BrowserAnimationsModule,
+    MatAutocompleteModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

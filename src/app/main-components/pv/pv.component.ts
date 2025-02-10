@@ -25,5 +25,19 @@ throw new Error('Method not implemented.');
 viewArtistDetails(arg0: any) {
 throw new Error('Method not implemented.');
 }
+isModalVisible: boolean = false;
 
+openModal(): void {
+  this.isModalVisible = true;
+  console.log(this.isModalVisible)
+}
+
+closeModal(): void {
+  this.isModalVisible = false;
+}
+
+handleSave(): void {
+  console.log('Data saved!');
+  this.closeModal(); // Optionally close the modal after saving
+}
 }

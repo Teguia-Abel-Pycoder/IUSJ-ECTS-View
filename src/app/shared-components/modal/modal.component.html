@@ -1,1 +1,62 @@
-<p>modal works!</p>
+<p-dialog 
+  header="{{ title }}" 
+  [(visible)]="visible" 
+  [modal]="true" 
+  [style]="{ width: '40vw' }" 
+  [baseZIndex]="10000" 
+  [draggable]="true" 
+  [resizable]="false"
+  aria-labelledby="modal-title"
+>
+  <!-- Modal Header -->
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between align-items-center">
+      <span id="modal-title">{{ title }}</span>
+    </div>
+  </ng-template>
+
+  <!-- Modal Body -->
+  <div class="p-4">
+    <p class="mb-4">{{ content }}</p>
+    <div class="classLevel">
+      <input
+        type="text"
+        matInput
+        [formControl]="classLevelControl"
+        [matAutocomplete]="auto"
+        placeholder="Class level..."
+      />
+      <mat-autocomplete 
+      #auto="matAutocomplete" 
+      (optionSelected)="onOptionSelected($event)" 
+      [panelClass]="'custom-autocomplete-panel'"
+    >
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+    </div>
+  </div>
+
+  <!-- Modal Footer -->
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end gap-2">
+      <button 
+        pButton 
+        class="cancel-btn"
+        type="button" 
+        label="Cancel" 
+        (click)="close()" 
+        styleClass="p-button-outlined p-button-secondary"
+      ></button>
+      <button 
+        pButton
+        class="save-btn"
+        type="button" 
+        label="Save" 
+        (click)="save()" 
+        styleClass="p-button-primary"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>

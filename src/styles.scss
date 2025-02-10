@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face {
+  @font-face {
     font-family: 'okine';
     src: url('assets/fonts/okine/MADEOkineSansPERSONALUSE-Regular.otf') format('truetype');
+    /* Ajoutez d'autres formats de police si nécessaire */
+  }
+  @font-face {
+    font-family: 'Bold okine';
+    src: url('assets/fonts/okine/MADEOkineSansPERSONALUSE-Bold.otf') format('truetype');
     /* Ajoutez d'autres formats de police si nécessaire */
   }
 body{
@@ -9,3 +14,5 @@ body{
     margin: 0;
     background-color: #fff;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
