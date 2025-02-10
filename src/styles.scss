@@ -16,6 +16,11 @@ body{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.cdk-overlay-container {
+  z-index: 10002 !important; /* Ensure overlays are above the modal */
+}
+
 .mat-autocomplete-panel {
-  z-index: 10001 !important; /* Ensure it's above all modals */
+  position: fixed !important; /* Ensure it's not constrained by the modal's stacking context */
+  z-index: 10002 !important; /* Ensure it's above the modal */
 }
