@@ -2,7 +2,7 @@
 header="{{ title }}" 
 [(visible)]="visible" 
 [modal]="true" 
-[style]="{ width: '40vw' }" 
+[style]="{ width: '45vw' }" 
 [baseZIndex]="9998"
 [draggable]="true" 
 [resizable]="false"
@@ -16,14 +16,14 @@ aria-labelledby="modal-title"
 <div class="p-4">
   <!-- <p class="mb-4">{{ content }}</p> -->
   <div class="block-div">
-    <p>Class level</p>
+    <p>School name</p>
     <div class="classLevel">
       <input
         type="text"
         matInput
         [formControl]="classLevelControl"
         [matAutocomplete]="auto"
-        placeholder="Class level..."
+        placeholder="School name..."
         autoActiveFirstOption
       />
       <mat-autocomplete 
@@ -39,58 +39,54 @@ aria-labelledby="modal-title"
   </div>
 
   <div class="flex-div">
-    <div class="block-div">
-      <p>Academic year</p>
+    <div class="block-div20">
+      <p>UE code</p>
       <div class="classLevel">
         <input
           type="text"
           matInput
-          [formControl]="classLevelControl"
-          [matAutocomplete]="auto"
-          placeholder="Academic year..."
-          autoActiveFirstOption
+          placeholder="Code..."
         />
-        <mat-autocomplete 
-          #auto="matAutocomplete" 
-          (optionSelected)="onOptionSelected($event)" 
-          [panelClass]="'custom-autocomplete-panel'"
-        >
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
+        
       </div>
     </div>
 
-      <div class="block-div">
-        <p>Semester</p>
+      <div class="block-div80">
+        <p>Course name</p>
         <div class="classLevel">
           <input
             type="text"
             matInput
-            [formControl]="classLevelControl"
-            [matAutocomplete]="auto"
-            placeholder="Semester..."
-            autoActiveFirstOption
+            placeholder="Course name..."
           />
-          <mat-autocomplete 
-            #auto="matAutocomplete" 
-            (optionSelected)="onOptionSelected($event)" 
-            [panelClass]="'custom-autocomplete-panel'"
-          >
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
         </div>
       </div>
   </div>
-  <div class="upload-div" 
-  id="drag-area" 
-  (drop)="onDrop($event)" 
-  (dragover)="onDragOver($event)">
- <input type="file" class="file-input" id="fileInput" name="documents" multiple (change)="onFileSelected($event)" />
- <p>{{ fileName || 'Choose your file or drag and drop it here' }}</p>
+
+  <div class="block-div">
+    <div>
+        <p>Add equivalences</p>
+        <div class="small-add-btn"></div>
+    </div>
+    <div class="classLevel">
+      <input
+        type="text"
+        matInput
+        [formControl]="classLevelControl"
+        [matAutocomplete]="auto"
+        placeholder="Course..."
+        autoActiveFirstOption
+      />
+      <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="onOptionSelected($event)" 
+        [panelClass]="'custom-autocomplete-panel'"
+      >
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
   </div>
 
 

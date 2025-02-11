@@ -125,10 +125,11 @@
     
     
 </div>
-<app-modal
-  [visible]="isModalVisible"
-  [title]="'New PV'"
+
+<app-equivalence-modal
+[visible]="isModalVisible"
+  [title]="'Add Course equivalences'"
   [content]="'This is some custom content passed to the modal.'"
   (onClose)="closeModal()"
-  (onSave)="handleSave()"
-></app-modal>
+  (onSave)="handleSave()">
+</app-equivalence-modal>
