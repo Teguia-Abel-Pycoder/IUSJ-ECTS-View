@@ -9,22 +9,23 @@ import { map, Observable, startWith } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 @Component({
-  selector: 'app-equivalence-modal',
-  templateUrl: './equivalence-modal.component.html',
-  styleUrl: './equivalence-modal.component.scss',
-    standalone: true,
-    encapsulation: ViewEncapsulation.Emulated, 
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [
-      CommonModule,
-      DialogModule,
-      ButtonModule,
-      ReactiveFormsModule,
-      MatAutocompleteModule,
-      MatInputModule
-    ]
+  selector: 'app-student-modal',
+  templateUrl: './student-modal.component.html',
+  styleUrl: './student-modal.component.scss',
+      standalone: true,
+      encapsulation: ViewEncapsulation.Emulated, 
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [
+        CommonModule,
+        DialogModule,
+        ButtonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatInputModule
+      ]
 })
-export class EquivalenceModalComponent {
+export class StudentModalComponent {
+
  @Input() visible: boolean = false;
   @Input() title: string = 'Modal Title';
   @Input() content: string = 'This is the default content.';

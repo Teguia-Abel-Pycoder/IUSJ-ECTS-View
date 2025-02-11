@@ -1,0 +1,137 @@
+<p-dialog 
+header="{{ title }}" 
+[(visible)]="visible" 
+[modal]="true" 
+[style]="{ width: '45vw' }" 
+[baseZIndex]="9998"
+[draggable]="true" 
+[resizable]="false"
+aria-labelledby="modal-title"
+>
+<ng-template pTemplate="header">
+<div class="flex justify-content-between align-items-center">
+    <span id="modal-title">{{ title }}</span>
+</div>
+</ng-template>
+<div class="p-4">
+<!-- <p class="mb-4">{{ content }}</p> -->
+<div class="block-div">
+    <p>School name</p>
+    <div class="classLevel">
+    <input
+        type="text"
+        matInput
+        [formControl]="classLevelControl"
+        [matAutocomplete]="auto"
+        placeholder="School name..."
+        autoActiveFirstOption
+    />
+    <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="onOptionSelected($event)" 
+        [panelClass]="'custom-autocomplete-panel'"
+    >
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ option }}
+        </mat-option>
+    </mat-autocomplete>
+    </div>
+</div>
+
+<div class="flex-div">
+    <div class="block-div20">
+    <p>UE code</p>
+    <div class="classLevel">
+        <input
+        type="text"
+        matInput
+        placeholder="Code..."
+        />
+        
+    </div>
+    </div>
+
+    <div class="block-div80">
+        <p>Course name</p>
+        <div class="classLevel">
+        <input
+            type="text"
+            matInput
+            placeholder="Course name..."
+        />
+        </div>
+    </div>
+</div>
+
+<div class="block-div">
+    <div>
+      <p>Add equivalences</p>
+      <div class="small-add-btn" 
+ [class.disabled]="!classLevelControl.value" 
+ (click)="!classLevelControl.value ? null : addCourse()">
+<p>Add</p>
+</div>
+    </div>
+  
+    <div class="classLevel">
+      <input
+        type="text"
+        matInput
+        [formControl]="classLevelControl"
+        [matAutocomplete]="auto"
+        placeholder="Course..."
+        autoActiveFirstOption
+      />
+      <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="onOptionSelected($event)" 
+        [panelClass]="'custom-autocomplete-panel'"
+      >
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  
+    <!-- Display added courses -->
+    <div class="courses">
+      <div *ngFor="let course of addedCourses; let i = index" class="course-item">
+        <div class="course">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="#333">
+              <path d="M180-215.39V-280h360v60l-360 4.61Zm0-155.76v-60h600v60H180Zm0-157.7v-60h600v60H180ZM180-680v-64.61h600V-680H180Z"/>
+            </svg>
+            <p>{{ course }}</p>
+          </div>
+          <svg class="delete-svg" (click)="removeCourse(i)" xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="#333">
+            <path d="M295.95-138.67q-31.91 0-53.85-21.94-21.95-21.94-21.95-53.85V-731.9H180v-51.18h174.77v-33.02h251.79v33.02h174.77v51.18h-40.15v517.44q0 31.3-22.25 53.55-22.24 22.24-53.55 22.24H295.95ZM690-731.9H271.33v517.44q0 10.77 7.18 17.69 7.18 6.92 17.44 6.92h369.43q9.24 0 16.93-7.69 7.69-7.69 7.69-16.92V-731.9ZM380.74-272.79h51.18v-377.49h-51.18v377.49Zm149.34 0h51.18v-377.49h-51.18v377.49ZM271.33-731.9V-189.85-731.9Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+</div>
+<ng-template pTemplate="footer">
+<div class="flex justify-content-end gap-2">
+    <button 
+    pButton 
+    class="cancel-btn"
+    type="button" 
+    label="Cancel" 
+    (click)="close()" 
+    styleClass="p-button-outlined p-button-secondary"
+    ></button>
+    <button 
+    pButton
+    class="save-btn"
+    type="button" 
+    label="Save" 
+    (click)="save()" 
+    styleClass="p-button-primary"
+    ></button>
+</div>
+</ng-template>
+</p-dialog>
