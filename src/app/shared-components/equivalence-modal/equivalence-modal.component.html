@@ -1,1 +1,118 @@
-<p>equivalence-modal works!</p>
+<p-dialog 
+header="{{ title }}" 
+[(visible)]="visible" 
+[modal]="true" 
+[style]="{ width: '40vw' }" 
+[baseZIndex]="9998"
+[draggable]="true" 
+[resizable]="false"
+aria-labelledby="modal-title"
+>
+<ng-template pTemplate="header">
+  <div class="flex justify-content-between align-items-center">
+    <span id="modal-title">{{ title }}</span>
+  </div>
+</ng-template>
+<div class="p-4">
+  <!-- <p class="mb-4">{{ content }}</p> -->
+  <div class="block-div">
+    <p>Class level</p>
+    <div class="classLevel">
+      <input
+        type="text"
+        matInput
+        [formControl]="classLevelControl"
+        [matAutocomplete]="auto"
+        placeholder="Class level..."
+        autoActiveFirstOption
+      />
+      <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="onOptionSelected($event)" 
+        [panelClass]="'custom-autocomplete-panel'"
+      >
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+
+  <div class="flex-div">
+    <div class="block-div">
+      <p>Academic year</p>
+      <div class="classLevel">
+        <input
+          type="text"
+          matInput
+          [formControl]="classLevelControl"
+          [matAutocomplete]="auto"
+          placeholder="Academic year..."
+          autoActiveFirstOption
+        />
+        <mat-autocomplete 
+          #auto="matAutocomplete" 
+          (optionSelected)="onOptionSelected($event)" 
+          [panelClass]="'custom-autocomplete-panel'"
+        >
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+
+      <div class="block-div">
+        <p>Semester</p>
+        <div class="classLevel">
+          <input
+            type="text"
+            matInput
+            [formControl]="classLevelControl"
+            [matAutocomplete]="auto"
+            placeholder="Semester..."
+            autoActiveFirstOption
+          />
+          <mat-autocomplete 
+            #auto="matAutocomplete" 
+            (optionSelected)="onOptionSelected($event)" 
+            [panelClass]="'custom-autocomplete-panel'"
+          >
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+  </div>
+  <div class="upload-div" 
+  id="drag-area" 
+  (drop)="onDrop($event)" 
+  (dragover)="onDragOver($event)">
+ <input type="file" class="file-input" id="fileInput" name="documents" multiple (change)="onFileSelected($event)" />
+ <p>{{ fileName || 'Choose your file or drag and drop it here' }}</p>
+  </div>
+
+
+  </div>
+<ng-template pTemplate="footer">
+  <div class="flex justify-content-end gap-2">
+    <button 
+      pButton 
+      class="cancel-btn"
+      type="button" 
+      label="Cancel" 
+      (click)="close()" 
+      styleClass="p-button-outlined p-button-secondary"
+    ></button>
+    <button 
+      pButton
+      class="save-btn"
+      type="button" 
+      label="Save" 
+      (click)="save()" 
+      styleClass="p-button-primary"
+    ></button>
+  </div>
+</ng-template>
+</p-dialog>

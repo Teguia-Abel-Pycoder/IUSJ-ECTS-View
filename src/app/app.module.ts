@@ -24,8 +24,7 @@ import { EquivalenceModalComponent } from './shared-components/equivalence-modal
     UserComponent,
     StudentComponent,
     SelectOptionComponent,
-    PvModalComponent,
-    EquivalenceModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -35,6 +34,8 @@ import { EquivalenceModalComponent } from './shared-components/equivalence-modal
     BreadcrumbComponent,
     ModalComponent,
     BrowserAnimationsModule,
+    EquivalenceModalComponent,
+    PvModalComponent,
     MatAutocompleteModule
   ],
   providers: [

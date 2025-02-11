@@ -460,10 +460,11 @@
     
     
 </div>
-<app-modal
-  [visible]="isModalVisible"
-  [title]="'New PV'"
-  [content]="'This is some custom content passed to the modal.'"
-  (onClose)="closeModal()"
-  (onSave)="handleSave()"
-></app-modal>
+
+<app-pv-modal
+[visible]="isModalVisible"
+[title]="'New PV'"
+[content]="'This is some custom content passed to the modal.'"
+(onClose)="closeModal()"
+(onSave)="handleSave()"
+></app-pv-modal>
