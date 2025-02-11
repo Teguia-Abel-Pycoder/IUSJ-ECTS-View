@@ -1,7 +1,7 @@
 
 
 ::ng-deep .p-dialog {
-    box-shadow: 1px 10px 8px 500px rgba(3, 3, 3, 0.55); // Subtle shadow
+    box-shadow: 1px 10px 8px 500px rgba(3, 3, 3, 0.56); // Subtle shadow
     border-radius:  8px ;
   
     .p-dialog-header {
@@ -23,10 +23,36 @@
         .block-div, .block-div20, .block-div80{
         display: block;
         width: 100%;
-        p{
+        div{
+            display: flex;
+            justify-content: space-between;
+            place-items: center;
             margin-bottom: 5px;
-
+            .small-add-btn{
+                border: 1px solid gray;
+                cursor: pointer;
+                transition: 0.3s all;
+                padding: 0px 8px;
+                height: 25px;
+                margin-top: 15px;
+                border-radius: 15px;
+                width: 45px;
+                font-size: 0.8rem;
+                justify-content: center;
+                display: flex;
+                p{
+                    display: inline;
+                    margin: 0;
+                }
+            }
+            .small-add-btn:hover{
+                background-color: #ebebeb;
+            }
         }
+            p{
+                margin-bottom: 5px;
+
+            }
             .classLevel{
             background-color: #ffffff;
             display: flex;
@@ -35,6 +61,7 @@
             border-radius: 4px;
             font-family: 'okine';
             transition: all 0.4s;
+            margin-bottom: 4px;
             margin-top: 0px;
             /* Style the autocomplete dropdown */
             .custom-autocomplete-panel {
@@ -152,7 +179,7 @@
             transition: background-color 0.3s ease;
           
             &.dragging {
-              background-color: #0057b300;
+              background-color: #1d3c5e00;
             }
           
             .file-input {
@@ -195,7 +222,7 @@
       
       button:hover{
         background-color: #e5e7eb;
-        border: 1px solid rgb(110, 110, 110);
+        border: 1px solid rgb(195, 195, 195);
 
       }
 
@@ -204,11 +231,11 @@
         background-color: rgb(12, 125, 12);
         border-radius: 20px;
         transition: 0.3s all;
-        padding: 8px;
+        padding: 8.5px;
         color: #fff;
       }
       .save-btn:hover{
-        border: 2px solid rgb(100, 179, 133);
+        border: 1px solid rgb(100, 179, 133);
         background-color: rgb(7, 89, 7);
         
       }
