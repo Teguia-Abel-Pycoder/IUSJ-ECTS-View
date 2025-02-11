@@ -14,6 +14,8 @@ import { ModalComponent } from './shared-components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PvModalComponent } from './shared-components/pv-modal/pv-modal.component';
+import { EquivalenceModalComponent } from './shared-components/equivalence-modal/equivalence-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     UserComponent,
     StudentComponent,
     SelectOptionComponent,
+    PvModalComponent,
+    EquivalenceModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -73,4 +73,42 @@ export class ModalComponent {
       alert('Please select a valid class level.');
     }
   }
+
+  fileName: string = ''; // Variable to store the file name
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault(); // Prevent default behavior to allow drop
+    const dragArea = document.getElementById('drag-area');
+    if (dragArea) {
+      dragArea.classList.add('dragging'); // Add visual feedback while dragging
+    }
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const dragArea = document.getElementById('drag-area');
+    if (dragArea) {
+      dragArea.classList.remove('dragging'); // Remove visual feedback after drop
+    }
+
+    // Get the dropped files
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.handleFiles(files);
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input && input.files && input.files.length > 0) {
+      this.handleFiles(input.files);
+    }
+  }
+
+  handleFiles(files: FileList) {
+    const file = files[0]; // Handle the first file (if multiple files are allowed, you can change this)
+    this.fileName = file.name; // Set the file name
+    console.log(file); // Optional: log the file object
+  }
 }
+
