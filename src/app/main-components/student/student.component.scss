@@ -221,7 +221,7 @@
             }
             .col-name{
 
-                width: 20%;
+                width: 18%;
                 background-color: #05ff3700;
                 div{
                     display: flex;
@@ -231,7 +231,7 @@
                 }
             }
             .col-quantity{
-                width: 10%;
+                width: 8%;
                 background-color: #05fff700;
                 div{
                     display: flex;
@@ -241,7 +241,7 @@
                 }
             }
             .col-semester{
-                width: 10%;
+                width: 8%;
                 background-color: #00ffaa00;
                 div{
                     display: flex;
@@ -251,7 +251,7 @@
                 }
             }
             .col-date{
-                width: 10%;
+                width: 8%;
                 background-color: #00a2ff00;
                 div{
                     display: flex;
@@ -271,8 +271,19 @@
 
                 }
             }
+            .col-time{
+                width: 8%;
+                background-color: #7b00ff00;
+                div{
+                    display: flex;
+                    justify-content: left;
+                    place-items: center;
+                    padding-top: 0px ;
+
+                }
+            }
             .col-price{
-                width: 10%;
+                width: 8%;
                 background-color: #6b1a2a00;
                 div{
                     display: flex;
@@ -284,7 +295,7 @@
             }
             
             .col-edit{
-                width:  10%;
+                width:  8%;
                 background-color: #ff000000;
                 div{
                     display: flex;
@@ -328,7 +339,7 @@
                     background-color: #ffe60600;
                 }
                 .name{
-                    width: 20%;
+                    width: 18%;
                     background-color: #05ff3700;
                     p{
                         margin-top: 12px;
@@ -337,7 +348,7 @@
                     
                 }
                 .quantity{
-                    width: 10%;
+                    width: 8%;
                     background-color: #292d2c00;
                     p{
                         margin-top: 12px;
@@ -347,7 +358,7 @@
                     }
                 }
                 .owner{
-                    width: 10%;
+                    width: 8%;
                     background-color: #00a2ff00;
                     p{
                         margin-left: 24px;
@@ -355,15 +366,15 @@
                     }
                 }
                 .price{
-                    width: 10%;
+                    width: 8%;
                     background-color: #00a2ff00;
                     p{
-                        margin-left: 24px;
+                        margin-left: 20px;
                         color: #808080;
                     }
                 }
                 .date{
-                    width: 10%;
+                    width: 8%;
                     background-color: #00ff7700;
                     p{
                         margin-left: 24px;
@@ -386,8 +397,20 @@
                         margin-top: 20px;
                     }
                 }
+                .time{
+                    width: 8%;
+                    background-color: #7b00ff00;
+                    
+                    
+                        p{
+
+                            color: #808080;
+                            margin-left: 24px;
+                         
+                        }
+                }
                 .status{
-                    width: 10%;
+                    width: 8%;
                     background-color: #7b00ff00;
                     
                     
@@ -404,6 +427,7 @@
                         height: 16px;
                         width: 45px;
                         border-radius: 10px;
+                        margin-left: 20px;
                         background-color: #c9ffc9;
                         p{
                             font-size: 11px;
@@ -446,7 +470,7 @@
                     cursor: pointer;
                     justify-content: center;
                     align-items: center;
-                    width: 10%;
+                    width: 8%;
                     background-color: #ff000000;
                     svg{
                         margin-top: 12px;

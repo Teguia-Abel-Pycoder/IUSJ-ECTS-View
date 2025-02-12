@@ -15,6 +15,33 @@ aria-labelledby="modal-title"
 </ng-template>
 <div class="p-4">
 <!-- <p class="mb-4">{{ content }}</p> -->
+
+
+<div class="flex-div">
+    <div class="block-div20">
+    <p>Student ID</p>
+    <div class="classLevel">
+        <input
+        type="text"
+        matInput
+        placeholder="Code..."
+        />
+        
+    </div>
+    </div>
+
+    <div class="block-div80">
+        <p>Student name</p>
+        <div class="classLevel">
+        <input
+            type="text"
+            matInput
+            placeholder="Course name..."
+        />
+        </div>
+    </div>
+</div>
+
 <div class="block-div">
     <p>School name</p>
     <div class="classLevel">
@@ -39,8 +66,9 @@ aria-labelledby="modal-title"
 </div>
 
 <div class="flex-div">
-    <div class="block-div20">
-    <p>UE code</p>
+    <div class="block-div">
+    <p>Academic level
+    </p>
     <div class="classLevel">
         <input
         type="text"
@@ -51,8 +79,8 @@ aria-labelledby="modal-title"
     </div>
     </div>
 
-    <div class="block-div80">
-        <p>Course name</p>
+    <div class="block-div">
+        <p>Semester</p>
         <div class="classLevel">
         <input
             type="text"
@@ -62,10 +90,9 @@ aria-labelledby="modal-title"
         </div>
     </div>
 </div>
-
 <div class="block-div">
     <div>
-      <p>Add equivalences</p>
+      <p>Add course</p>
       <div class="small-add-btn" 
  [class.disabled]="!classLevelControl.value" 
  (click)="!classLevelControl.value ? null : addCourse()">

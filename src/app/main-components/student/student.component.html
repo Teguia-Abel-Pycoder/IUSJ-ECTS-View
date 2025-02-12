@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="col-status">
-                <div>
+                <div class="status-good">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#939393"><path d="M480-158.62 331.08-307.54l36.38-36.38L480-231.38l112.54-112.54 36.38 36.38L480-158.62Zm-112.54-459L331.08-654 480-802.92 628.92-654l-36.38 36.38L480-730.16 367.46-617.62Z"/></svg>
                     <p>Courses</p>
                 </div>
@@ -84,6 +84,13 @@
                     <p>MGP</p>
                 </div>
             </div>
+            <div class="col-time">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#939393"><path d="M480-158.62 331.08-307.54l36.38-36.38L480-231.38l112.54-112.54 36.38 36.38L480-158.62Zm-112.54-459L331.08-654 480-802.92 628.92-654l-36.38 36.38L480-730.16 367.46-617.62Z"/></svg>
+                    <p>Status</p>
+                </div>
+            </div>
+            
             <div class="col-edit">
                 <p>Actions</p>
             </div>
@@ -126,10 +133,14 @@
 
                 </div>
                 
-                <div class="status">
+                <div class="time">
                         <p>3.14</p>
                 </div>
-                        
+                <div class="status">
+                    <div class="status-good">
+                        <p>Status</p>
+                    </div>
+            </div>
                         
                 
                 <div class="edit">
@@ -143,10 +154,10 @@
     
 </div>
 
-<app-equivalence-modal
+
+<app-student-modal
 [visible]="isModalVisible"
   [title]="'Add student'"
   [content]="'This is some custom content passed to the modal.'"
   (onClose)="closeModal()"
-  (onSave)="handleSave()">
-</app-equivalence-modal>
+  (onSave)="handleSave()"></app-student-modal>
