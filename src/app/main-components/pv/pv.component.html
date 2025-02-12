@@ -81,37 +81,38 @@
         </div>
     
         <div class="table-body">
-            <div class="row" >
+            <div class="row" *ngFor="let file of files">
                 <div class="checkbox">
                     <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
+                        <input type="checkbox">
                         <div class="checkmark"></div>
                     </label>
                 </div>
                 <div class="name">
-                    <p> Ing. SRT4</p>
+                    <p>{{ file.classLevel }}</p>
                 </div>
                 <div class="quantity">
-                    <p>1st</p> 
+                    <p>{{ file.semester }}</p>
                 </div>
                 <div class="date">
-                    <p>2023-2024</p> 
+                    <p>{{ file.academicYear }}</p>
                 </div>
                 <div class="owner">
-                    <p>ELONO Brice</p> 
+                    <p>{{ file.uploadedBy }}</p>
                 </div>
                 <div class="status">
                     <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
+                        <p>{{ formatDateTime(file.uploadedTime).date }}</p> 
+                        <p>{{ formatDateTime(file.uploadedTime).time }}</p>
                     </div>
                 </div>
-                
                 <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
+                        <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
+                    </svg>
                 </div>
             </div>
+            
             <div class="row" >
                 <div class="checkbox">
                     <label class="container">
