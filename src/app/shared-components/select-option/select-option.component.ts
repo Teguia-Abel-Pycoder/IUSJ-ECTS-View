@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-select-option',
@@ -7,20 +7,31 @@ import { Component, Input } from '@angular/core';
   templateUrl: './select-option.component.html',
   styleUrl: './select-option.component.scss'
 })
-export class SelectOptionComponent {
-  @Input() title: string = 'Select Option';  // Dynamic label
-  @Input() options: string[] = []; // Dynamic options
+export class SelectOptionComponent {  @Input() title: string = 'Select Option';
+  @Input() options: string[] = [];
+  @Output() optionSelected = new EventEmitter<string>(); // ✅ Emit selected value
 
-  isDropdownOpen = true;
+  isDropdownOpen = false;
   selectedOption: string | null = null;
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-  selectOption(option: string) {
-    this.selectedOption = option;
-    this.isDropdownOpen = false;
-  }
+
+toggleDropdown() {
+  this.isDropdownOpen = !this.isDropdownOpen;
+}
+
+closeDropdown() {
+  this.isDropdownOpen = false;
+}
+
+keepDropdownOpen() {
+  this.isDropdownOpen = true;
+}
+
+selectOption(option: string) {
+  this.selectedOption = option;
+  this.isDropdownOpen = false;
+  this.optionSelected.emit(option); // ✅ Emit selected option
+}
   getSvgIcon(): string {
     switch (this.title) {
       case 'School':

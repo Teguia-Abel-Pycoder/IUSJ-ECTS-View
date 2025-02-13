@@ -6,7 +6,7 @@
         </div>
         <div class="right-part">
             
-            <div class="delete-button" (click)="deleteSelectedArtists()">
+            <div class="delete-button" >
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#32303f"><path d="M648-624v-120H312v120h-72v-192h480v192h-72Zm-480 72h625-625Zm539.79 96q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5ZM648-216v-144H312v144h336Zm72 72H240v-144H96v-240q0-40 28-68t68-28h576q40 0 68 28t28 68v240H720v144Zm73-216v-153.67Q793-530 781-541t-28-11H206q-16.15 0-27.07 11.04Q168-529.92 168-513.6V-360h72v-72h480v72h73Z"/></svg>
                 <p>Print</p>
             
@@ -21,13 +21,23 @@
         </div>
     </div>
     <div class="searchFilters">
-      <app-searchbar (searchQueryChange)="filterStudents($event)"></app-searchbar> 
+        <app-searchbar (searchQueryChange)="filterStudents($event)"></app-searchbar>
         <div class="filters">
-            <app-select-option title="Semester" [options]="['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4']"></app-select-option>
-            <app-select-option title="Equivalence" [options]="['High School', 'Undergraduate', 'Postgraduate', 'PhD']"></app-select-option>
-            <app-select-option title="Level" [options]="['Freshman', 'Sophomore', 'Junior', 'Senior']"></app-select-option>
-            <app-select-option title="Year" [options]="['2021', '2022', '2023', '2024']"></app-select-option>
-
+            <app-select-option title="Semester" 
+            [options]="['All Semesters', 'SEMESTER1', 'SEMESTER2']"
+            (optionSelected)="onSemesterSelected($event)">
+          </app-select-option>
+          
+          <app-select-option title="Academic Level" 
+            [options]="['All levels', 'SRT3', 'SRT4', 'SRT5', 'ISI3', 'ISI4', 'ISI5']"
+            (optionSelected)="onAcademicLevelSelected($event)">
+          </app-select-option>
+          
+          <app-select-option title="Academic Year" 
+            [options]="['All year', '2021-2022', '2022-2023', '2023-2024', '2024-2025']"
+            (optionSelected)="onAcademicYearSelected($event)">
+          </app-select-option>
+          
         <!-- <app-select-option></app-select-option>
         <app-select-option></app-select-option> -->
             
@@ -44,7 +54,7 @@
             <div class="col-name">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#939393"><path d="M480-158.62 331.08-307.54l36.38-36.38L480-231.38l112.54-112.54 36.38 36.38L480-158.62Zm-112.54-459L331.08-654 480-802.92 628.92-654l-36.38 36.38L480-730.16 367.46-617.62Z"/></svg>
-                    <p>Class level</p>
+                    <p>Academic level</p>
                     
                 </div>
             </div>
@@ -81,381 +91,38 @@
         </div>
     
         <div class="table-body">
-            <div class="row" *ngFor="let file of files">
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox">
-                        <div class="checkmark"></div>
-                    </label>
+            <div class="row" *ngFor="let file of sortedFiles">
+              <div class="checkbox">
+                <label class="container">
+                  <input type="checkbox">
+                  <div class="checkmark"></div>
+                </label>
+              </div>
+              <div class="name">
+                <p>{{ file.classLevel }}</p>
+              </div>
+              <div class="quantity">
+                <p>{{ file.semester }}</p> 
+              </div>
+              <div class="date">
+                <p>{{ file.academicYear }}</p> 
+              </div>
+              <div class="owner">
+                <p>{{ file.uploadedBy }}</p> 
+              </div>
+              <div class="status">
+                <div>
+                  <p>{{ file.uploadedTime | date: 'MMM d, y' }}</p> 
+                  <p>{{ file.uploadedTime | date: 'h:mm a' }}</p>
                 </div>
-                <div class="name">
-                    <p>{{ file.classLevel }}</p>
-                </div>
-                <div class="quantity">
-                    <p>{{ file.semester }}</p>
-                </div>
-                <div class="date">
-                    <p>{{ file.academicYear }}</p>
-                </div>
-                <div class="owner">
-                    <p>{{ file.uploadedBy }}</p>
-                </div>
-                <div class="status">
-                    <div>
-                        <p>{{ formatDateTime(file.uploadedTime).date }}</p> 
-                        <p>{{ formatDateTime(file.uploadedTime).time }}</p>
-                    </div>
-                </div>
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
-                        <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
-                    </svg>
-                </div>
+              </div>
+              <div class="edit" (click)="editFile(file)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
+                  <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
+                </svg>
+              </div>
             </div>
-            
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="name">
-                    <p> Ing. SRT4</p>
-                </div>
-                <div class="quantity">
-                    <p>1st</p> 
-                </div>
-                <div class="date">
-                    <p>2023-2024</p> 
-                </div>
-                <div class="owner">
-                    <p>ELONO Brice</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Oct 13, 2024</p> 
-                        <p>10:34 AM</p>
-                    </div>
-                </div>
-                
-                <div class="edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333"><path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/></svg>
-                </div>
-            </div>
-            
-        </div>
+          </div>
     </div>
     
     
@@ -463,9 +130,9 @@
 </div>
 
 <app-pv-modal
-[visible]="isModalVisible"
-[title]="'New PV'"
-[content]="'This is some custom content passed to the modal.'"
-(onClose)="closeModal()"
-(onSave)="handleSave()"
-></app-pv-modal>
+  [visible]="isModalVisible"
+  [title]="modalTitle"
+  [fileData]="selectedFileData"  
+  (onClose)="closeModal()"
+  (onSave)="handleSave()">
+</app-pv-modal>

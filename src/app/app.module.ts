@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PvModalComponent } from './shared-components/pv-modal/pv-modal.component';
 import { EquivalenceModalComponent } from './shared-components/equivalence-modal/equivalence-modal.component';
 import { StudentModalComponent } from './shared-components/student-modal/student-modal.component';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,10 +39,12 @@ import { StudentModalComponent } from './shared-components/student-modal/student
     EquivalenceModalComponent,
     StudentModalComponent,
     PvModalComponent,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
