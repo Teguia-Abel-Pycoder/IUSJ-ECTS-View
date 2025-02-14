@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Equivalence, EquivalenceService } from '../../services/equivalence/equivalence.service';
 import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-equivalence',
   standalone: false,
@@ -10,6 +11,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EquivalenceComponent {
 equivalences: Equivalence[] = [];
+schoolNameControl = new FormControl('');
+academicLevelControl = new FormControl('');
+typeControl = new FormControl('');
+courseCodeControl = new FormControl('');
+equivalenceControl = new FormControl('');
+newCourses: { [key: string]: string[] } = {};
+
+
 
   searchQuery: string = '';
 filterStudents(query: string) {
@@ -23,7 +32,7 @@ sortedFiles = [
   { classLevel: 'Level 1', semester: 'Fall', academicYear: '2025', uploadedBy: 'John', uploadedTime: new Date() },
   // Add more files here
 ];
-constructor(private http: HttpClient, private fileService:  EquivalenceService) {}
+constructor(private http: HttpClient, private equivalenceService:  EquivalenceService) {}
 // Array to track which file has its options panel displayed
 showOptions: boolean[] = [];
 
@@ -33,7 +42,7 @@ ngOnInit() {
 }
 
 fetchEquivalences(): void {
-  this.fileService.fetchFiles().subscribe(data => {
+  this.equivalenceService.fetchFiles().subscribe(data => {
     this.equivalences = data.map(eq => ({
       ...eq,
       isiCourses: JSON.parse(eq.isiCoursesJson || '{}'),
@@ -44,6 +53,43 @@ fetchEquivalences(): void {
   });
 }
 
+
+
+addCourse() {
+  const courseCode = this.courseCodeControl.value;
+  const equivalence = this.equivalenceControl.value;
+
+  if (courseCode && equivalence) {
+    if (!this.newCourses[courseCode]) {
+      this.newCourses[courseCode] = [];
+    }
+    this.newCourses[courseCode].push(equivalence);
+    this.equivalenceControl.setValue('');
+  }
+}
+
+save() {
+  const schoolName = this.schoolNameControl.value;
+  const academicLevel = this.academicLevelControl.value;
+  const type = this.typeControl.value;
+
+  if (!schoolName || !academicLevel || !type || Object.keys(this.newCourses).length === 0) {
+    alert('Please fill in all fields and add at least one course equivalence.');
+    return;
+  }
+
+  this.equivalenceService.addEquivalence(schoolName, academicLevel, type, this.newCourses)
+    .subscribe(
+      response => {
+        console.log('Equivalence added successfully:', response);
+        alert('Equivalence saved successfully!');
+      },
+      error => {
+        console.error('Error saving equivalence:', error);
+        alert('Failed to save equivalence.');
+      }
+    );
+}
 
 
 // Toggle the options panel for the clicked file

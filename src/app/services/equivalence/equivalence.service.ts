@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -23,4 +23,24 @@ export class EquivalenceService {
   fetchFiles(): Observable<Equivalence[]> {
     return this.http.get<Equivalence[]>(this.apiUrl);
   }
+  addEquivalence(
+    schoolName: string,
+    academicLevel: string,
+    type: string,
+    newCourses: { [key: string]: string[] }
+  ): Observable<string> {
+    const url = `${this.apiUrl}/add-equivalence`;
+    const params = { schoolName, academicLevel, type };
+     // Convert to JSON string
+     const jsonString = JSON.stringify(newCourses, null, 2); // null, 2 makes it readable
+     console.log("jsonString", jsonString);
+    return this.http.post<string>(url, jsonString, {
+      params,
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
+    });
+  }
+  
 }

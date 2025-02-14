@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 import { map, Observable, startWith } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { EquivalenceService } from '../../services/equivalence/equivalence.service';
 @Component({
   selector: 'app-equivalence-modal',
   templateUrl: './equivalence-modal.component.html',
@@ -30,19 +31,115 @@ export class EquivalenceModalComponent {
   @Input() content: string = 'This is the default content.';
   @Output() onClose = new EventEmitter<void>();
   @Output() onSave = new EventEmitter<void>();
-  addedCourses: string[] = []; // Stores selected courses
-  // Form Control for autocomplete
-  classLevelControl = new FormControl('', [
+  
+
+  schoolNameControl = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
   ]);
-  constructor(private overlayContainer: OverlayContainer) {}
+  academicLevelControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  typeControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  courseControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  codeControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  equivalenceControl =  new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  // newCourses: { [key: string]: string[] } = {};
+
+  fullName: string = "";
+  addedCourses: string[] = []; // Stores selected courses
+  // Form Control for autocomplete
+  classLevelControl= new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  constructor(private overlayContainer: OverlayContainer, private equivalenceService: EquivalenceService) {}
   // Options for autocomplete
   options: string[] = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
   ngOnInit() {
     this.overlayContainer.getContainerElement().classList.add('custom-autocomplete-container');
   }
+
+
+
+  // addCourse() {
+  //   const courseCode = this.courseCodeControl.value;
+  //   const equivalence = this.equivalenceControl.value;
+
+  //   if (courseCode && equivalence) {
+  //     if (!this.newCourses[courseCode]) {
+  //       this.newCourses[courseCode] = [];
+  //     }
+  //     this.newCourses[courseCode].push(equivalence);
+  //     this.equivalenceControl.setValue('');
+  //   }
+  // }
+
+  save() {
+    const schoolName = this.schoolNameControl.value?.trim();
+    const academicLevel = this.academicLevelControl.value;
+    const type = this.typeControl.value;
+    const courseName = this.courseControl.value;
+    const code = this.codeControl.value;
+
+
+    if (!schoolName || !academicLevel || !type ) {
+      alert('Please fill in all fields and add at least one course equivalence.');
+      return;
+    }
+    console.log("schoolname", schoolName)
+    console.log("academicLevel", academicLevel)
+    console.log("type", type)
+    console.log("courseName", courseName)
+    console.log("code", code)
+    this.fullName = code?.trim() + "-" + courseName?.trim();
+    console.log("fullName", this.fullName);
+
+    let newCourse: { [key: string]: string[] } = {
+      [this.fullName]: this.addedCourses // Use square brackets to define dynamic key
+    };
+
+    console.log("newCourses", newCourse)
+
+
+    this.equivalenceService.addEquivalence(schoolName, academicLevel, type, newCourse)
+      .subscribe(
+        response => {
+          console.log('Equivalence added successfully:', response);
+          alert('Equivalence saved successfully!');
+        },
+        error => {
+          console.error('Error saving equivalence:', error);
+          alert('Failed to save equivalence.');
+        }
+      );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   // Filtered options observable
   filteredOptions: Observable<string[]> = this.classLevelControl.valueChanges.pipe(
     startWith(''),
@@ -65,14 +162,7 @@ export class EquivalenceModalComponent {
     this.onClose.emit();
   }
 
-  // Save action
-  save(): void {
-    if (this.classLevelControl.valid) {
-      this.onSave.emit();
-    } else {
-      alert('Please select a valid class level.');
-    }
-  }
+
 
   fileName: string = ''; // Variable to store the file name
 
@@ -111,7 +201,7 @@ export class EquivalenceModalComponent {
     console.log(file); // Optional: log the file object
   }
   addCourse() {
-    const course = this.classLevelControl.value;
+    const course = this.equivalenceControl.value;
     if (course && !this.addedCourses.includes(course)) {
       this.addedCourses.push(course);
       this.classLevelControl.setValue(''); // Clear input field

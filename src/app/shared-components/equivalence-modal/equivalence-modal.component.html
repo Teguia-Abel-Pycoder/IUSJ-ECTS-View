@@ -20,7 +20,7 @@
         <input
             type="text"
             matInput
-            [formControl]="classLevelControl"
+            [formControl]="schoolNameControl"
             [matAutocomplete]="auto"
             placeholder="School name..."
             autoActiveFirstOption
@@ -39,12 +39,12 @@
     <div class="flex-div">
 
       <div class="block-div50">
-        <p>Branche</p>
+        <p>Type</p>
         <div class="classLevel">
         <input
             type="text"
             matInput
-            [formControl]="classLevelControl"
+            [formControl]="typeControl"
             [matAutocomplete]="auto"
             placeholder="Branche..."
             autoActiveFirstOption
@@ -66,6 +66,7 @@
         <div class="classLevel">
             <input
             type="text"
+            [formControl]="academicLevelControl"
             matInput
             placeholder="Level..."
             />
@@ -84,7 +85,8 @@
             <input
                 type="text"
                 matInput
-                placeholder="Course name..."
+            [formControl]="courseControl"
+            placeholder="Course name..."
             />
             </div>
         </div>
@@ -94,6 +96,7 @@
         <div class="classLevel">
             <input
             type="text"
+            [formControl]="codeControl"
             matInput
             placeholder="Code..."
             />
@@ -108,8 +111,8 @@
         <div>
           <p>Add equivalences</p>
           <div class="small-add-btn" 
-     [class.disabled]="!classLevelControl.value" 
-     (click)="!classLevelControl.value ? null : addCourse()">
+     [class.disabled]="!equivalenceControl.value" 
+     (click)="!equivalenceControl.value ? null : addCourse()">
   <p>Add</p>
 </div>
         </div>
@@ -118,7 +121,7 @@
           <input
             type="text"
             matInput
-            [formControl]="classLevelControl"
+            [formControl]="equivalenceControl"
             [matAutocomplete]="auto"
             placeholder="Course..."
             autoActiveFirstOption
