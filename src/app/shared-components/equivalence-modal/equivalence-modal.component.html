@@ -14,8 +14,7 @@
     </div>
     </ng-template>
     <div class="p-4">
-    <!-- <p class="mb-4">{{ content }}</p> -->
-    <div class="block-div">
+      <div class="block-div">
         <p>School name</p>
         <div class="classLevel">
         <input
@@ -36,9 +35,60 @@
             </mat-option>
         </mat-autocomplete>
         </div>
+      </div>
+    <div class="flex-div">
+
+      <div class="block-div50">
+        <p>Branche</p>
+        <div class="classLevel">
+        <input
+            type="text"
+            matInput
+            [formControl]="classLevelControl"
+            [matAutocomplete]="auto"
+            placeholder="Branche..."
+            autoActiveFirstOption
+        />
+        <mat-autocomplete 
+            #auto="matAutocomplete" 
+            (optionSelected)="onOptionSelected($event)" 
+            [panelClass]="'custom-autocomplete-panel'"
+        >
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+            </mat-option>
+        </mat-autocomplete>
+        </div>
+      </div>
+        
+        <div class="block-div50">
+        <p>Academic Level</p>
+        <div class="classLevel">
+            <input
+            type="text"
+            matInput
+            placeholder="Level..."
+            />
+            
+        </div>
+        </div>
+
+        
     </div>
 
     <div class="flex-div">
+
+      <div class="block-div80">
+            <p>Course name</p>
+            <div class="classLevel">
+            <input
+                type="text"
+                matInput
+                placeholder="Course name..."
+            />
+            </div>
+        </div>
+
         <div class="block-div20">
         <p>UE code</p>
         <div class="classLevel">
@@ -51,16 +101,7 @@
         </div>
         </div>
 
-        <div class="block-div80">
-            <p>Course name</p>
-            <div class="classLevel">
-            <input
-                type="text"
-                matInput
-                placeholder="Course name..."
-            />
-            </div>
-        </div>
+        
     </div>
 
     <div class="block-div">

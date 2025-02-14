@@ -20,7 +20,7 @@
       padding: 1.5rem; 
       padding-top: 0;
       background-color: #ffffff; 
-        .block-div, .block-div20, .block-div80{
+        .block-div, .block-div20, .block-div80, .block-div50{
         display: block;
         width: 100%;
         div{
@@ -236,11 +236,15 @@
         }
         .block-div20{
             display: block;
-            width: 24%;
+            width: 31%;
         }
+        .block-div50{
+          display: block;
+          width: 49.2%;
+      }
         .block-div80{
             display: block;
-            width: 74%;
+            width: 67.4%;
         }
         }
         .upload-div {

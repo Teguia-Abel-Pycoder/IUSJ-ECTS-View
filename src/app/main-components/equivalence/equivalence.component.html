@@ -83,55 +83,91 @@
         </div>
     
         <div class="table-body">
-            <div class="row" *ngFor="let file of sortedFiles; let i = index">
-                <div class="checkbox">
-                    <label class="container">
-                        <input type="checkbox" type="checkbox"
-                       >
-                        <div class="checkmark"></div>
-                    </label>
-                </div>
-                <div class="price">
-                    <p>ELONO Brice</p> 
-                    
-            </div>
-                <div class="name">
-                    <p>RES4218</p>
-                </div>
-                <div class="quantity">
-                    <p>Services réseaux et téléphonie sur IP</p> 
-                </div>
-                <div class="date">
-                    <p>Digital Communications</p> 
-                    <p>L’entreprise dans le contexte africain</p> 
-                    <p>Communications optiques</p> 
-
-                </div>
-                <div class="owner">
-                    <p>SRT</p> 
-                </div>
-                <div class="status">
-                    <div>
-                        <p>Ing. 4 SRT</p> 
-                        
-                    </div>
-                </div>
-                
-                <div class="edit" (click)="toggleOptions(i)"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
-                      <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
-                    </svg>
-                  </div>
-                  <!-- Option Panel -->
-                  <div *ngIf="showOptions[i]" class="options-panel">
-                    <button (click)="editFile()">Edit</button>
-                    <button (click)="deleteFile()">Delete</button>
-                  </div>
-                
-            </div>
-
+            <!-- Loop through ISI Courses -->
+<div *ngFor="let equivalence of equivalences; let i = index"> 
+    <div *ngFor="let course of equivalence.isiCourses | keyvalue">
+      <div class="row">
+        <div class="checkbox">
+          <label class="container">
+            <input type="checkbox">
+            <div class="checkmark"></div>
+          </label>
         </div>
+        <div class="price">
+          <p>{{ equivalence.schoolName }}</p>
+        </div>
+        <div class="name">
+          <p>{{ course.key.split('-')[0] }}</p>
+        </div>
+        <div class="quantity">
+          <p>{{ course.key.split('-').slice(1).join(' ') }}</p>
+        </div>
+        <div class="date">
+          <p *ngFor="let courseName of course.value">{{ courseName }}</p>
+        </div>
+        <div class="owner">
+          <p>ISI</p>  <!-- Set to "ISI" when inside isiCourses -->
+        </div>
+        <div class="status">
+          <div>
+            <p>{{ equivalence.academicLevel }}</p>
+          </div>
+        </div>
+        <div class="edit" >
+          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
+            <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
+          </svg>
+        </div>
+        
+      </div>
     </div>
+  </div>
+  
+  <!-- Loop through SRT Courses -->
+  <div *ngFor="let equivalence of equivalences; let i = index"> 
+    <div *ngFor="let course of equivalence.srtCourses | keyvalue">
+      <div class="row">
+        <div class="checkbox">
+          <label class="container">
+            <input type="checkbox">
+            <div class="checkmark"></div>
+          </label>
+        </div>
+        <div class="price">
+          <p>{{ equivalence.schoolName }}</p>
+        </div>
+        <div class="name">
+          <p>{{ course.key.split('-')[0] }}</p>
+        </div>
+        <div class="quantity">
+          <p>{{ course.key.split('-').slice(1).join(' ') }}</p>
+        </div>
+        <div class="date">
+          <p *ngFor="let courseName of course.value">{{ courseName }}</p>
+        </div>
+        <div class="owner">
+          <p>SRT</p>  <!-- Set to "SRT" when inside srtCourses -->
+        </div>
+        <div class="status">
+          <div>
+            <p>{{ equivalence.academicLevel }}</p>
+          </div>
+        </div>
+        <div class="edit" >
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333">
+              <path d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z"/>
+            </svg>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+  
+              </div>
+              
+              
+
+
     
     
     

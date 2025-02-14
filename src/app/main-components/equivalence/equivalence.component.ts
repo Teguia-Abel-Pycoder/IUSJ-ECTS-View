@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { Equivalence, EquivalenceService } from '../../services/equivalence/equivalence.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-equivalence',
   standalone: false,
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './equivalence.component.scss'
 })
 export class EquivalenceComponent {
+equivalences: Equivalence[] = [];
 
   searchQuery: string = '';
 filterStudents(query: string) {
@@ -21,9 +23,28 @@ sortedFiles = [
   { classLevel: 'Level 1', semester: 'Fall', academicYear: '2025', uploadedBy: 'John', uploadedTime: new Date() },
   // Add more files here
 ];
-
+constructor(private http: HttpClient, private fileService:  EquivalenceService) {}
 // Array to track which file has its options panel displayed
 showOptions: boolean[] = [];
+
+ngOnInit() {
+  this.fetchEquivalences();
+  console.log("this.equivalences", this.equivalences);
+}
+
+fetchEquivalences(): void {
+  this.fileService.fetchFiles().subscribe(data => {
+    this.equivalences = data.map(eq => ({
+      ...eq,
+      isiCourses: JSON.parse(eq.isiCoursesJson || '{}'),
+      srtCourses: JSON.parse(eq.srtCoursesJson || '{}')
+    }));
+    this.showOptions = new Array(this.equivalences.length).fill(false);
+    console.log("this.equivalences", this.equivalences);
+  });
+}
+
+
 
 // Toggle the options panel for the clicked file
 toggleOptions(index: number): void {
