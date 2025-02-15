@@ -145,7 +145,8 @@ export class PvModalComponent {
           }
         });
       }
-    } else if (this.isFormValid()) {
+    } 
+    else if (this.isFormValid()) {
       apiUrl = 'http://localhost:8080/iusj-ects/api/file/create';
       this.http.post(apiUrl, formData).subscribe({
         next: (response) => {
@@ -157,7 +158,8 @@ export class PvModalComponent {
           alert('Error uploading file.');
         }
       });
-    } else {
+    } 
+    else {
       alert('Please ensure all fields are valid and a file is selected.');
     }
   }

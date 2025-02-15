@@ -29,18 +29,21 @@ export class EquivalenceService {
     type: string,
     newCourses: { [key: string]: string[] }
   ): Observable<string> {
-    const url = `${this.apiUrl}/add-equivalence`;
-    const params = { schoolName, academicLevel, type };
-     // Convert to JSON string
-     const jsonString = JSON.stringify(newCourses, null, 2); // null, 2 makes it readable
-     console.log("jsonString", jsonString);
+    // Concatenate URL with query parameters
+    const url = `${this.apiUrl}/add-equivalence?schoolName=${schoolName}&academicLevel=${academicLevel}&type=${type}`;
+    
+    // Convert newCourses to JSON string
+    const jsonString = JSON.stringify(newCourses, null, 2); // null, 2 makes it readable
+    console.log("jsonString", jsonString);
+  
+    // Send POST request
     return this.http.post<string>(url, jsonString, {
-      params,
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       })
     });
   }
+  
   
 }
